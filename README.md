@@ -3,9 +3,10 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/QuadDamn/battlenet-api-wrapper.svg)](https://greenkeeper.io/)
 
 **FORKED FROM https://github.com/QuadDamn/battlenet-api-wrapper**
-- The original code is not fully compatible with the new battle.net API, especially the WoW detail API (tbh, it's the only one I care about and maintain), that's why I'm adapting it because I need a wrapper and if I can't start empty, it's perfect !
+The original code is not fully compatible with the new battle.net API, especially the WoW detail API (tbh, it's the only one I care about and maintain), that's why I'm adapting it because I need a wrapper and if I can't start empty, it's perfect !
 
 **WARNING : ONLY WOW RETAIL IS FULLY COMPATIBLE CUZ THE NEW VERSION OF BNET API**
+
 **THE OTHER ENDPOINT ARE MAYBE COMPATIBLE BUT NOT TESTED YET**
 
 A promised-based Node.js wrapper for the Battle.net Community and Data APIs (supports WoW, WoW Classic, SC2, D3, and Hearthstone).
