@@ -307,7 +307,8 @@ class WowProfileData {
                 params: {
                     namespace: this.namespace,
                     ...this.defaultAxiosParams
-                }});
+                }
+            });
             return response.data;
         } catch (error) {
             console.log(error);

@@ -11,10 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 class WowCommunity {
-    constructor(axiosInstance, defaultAxiosParams) {
+    constructor(axiosInstance, defaultAxiosParams, origin) {
         this.gameBaseUrlPath = '/wow';
+        this.gameDataBaseUrlPath = '/data/wow';
+        this.gameProfilBaseUrlPath = '/profile/wow';
         this.axios = axiosInstance;
         this.defaultAxiosParams = defaultAxiosParams;
+        this.namespace = `profile-${origin}`;
     }
     /****************************
      * Achievement API
@@ -26,7 +29,7 @@ class WowCommunity {
      */
     getAchievement(achievementId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this._handleApiCall(`${this.gameBaseUrlPath}/achievement/${achievementId}`, 'Error fetching specified achievement.');
+            return yield this._handleApiCall(`${this.gameDataBaseUrlPath}/achievement/${achievementId}`, 'Error fetching specified achievement.');
         });
     }
     /****************************
@@ -38,7 +41,7 @@ class WowCommunity {
      */
     getBossMasterList() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this._handleApiCall(`${this.gameBaseUrlPath}/boss`, 'Error fetching master boss list.');
+            return yield this._handleApiCall(`${this.gameDataBaseUrlPath}/journal-encounter/index`, 'Error fetching master boss list.');
         });
     }
     /**
@@ -49,7 +52,7 @@ class WowCommunity {
      */
     getBoss(bossId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this._handleApiCall(`${this.gameBaseUrlPath}/boss/${bossId}`, 'Error fetching specified boss.');
+            return yield this._handleApiCall(`${this.gameDataBaseUrlPath}/journal-encounter/${bossId}`, 'Error fetching specified boss.');
         });
     }
     /****************************
@@ -65,7 +68,7 @@ class WowCommunity {
      */
     getChallengeModeRealmLeaderboard(realmSlug) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this._handleApiCall(`${this.gameBaseUrlPath}/challenge/${realmSlug}`, 'Error fetching challenge mode realm leaderboard.');
+            return yield this._handleApiCall(`${this.gameBaseUrlPath}/challenge/${realmSlug}`, '#TODO CHALLENGE MODE REALM LEADERBOARD NOT SUPPORTED IN THIS VERSION');
         });
     }
     /**
@@ -75,7 +78,7 @@ class WowCommunity {
      */
     getChallengeModeRegionLeaderboard() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this._handleApiCall(`${this.gameBaseUrlPath}/challenge/region`, 'Error fetching challenge mode region leaderboard.');
+            return yield this._handleApiCall(`${this.gameBaseUrlPath}/challenge/region`, 'CHALLENGE REGION LEADERBOARD DEPRECATED BY BATTLE.NET');
         });
     }
     /****************************
@@ -96,16 +99,7 @@ class WowCommunity {
      */
     getCharacterProfile(realm, characterName, fields) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axios.get(encodeURI(`${this.gameBaseUrlPath}/character/${realm}/${characterName}`), {
-                    params: Object.assign({ fields: fields }, this.defaultAxiosParams)
-                });
-                return response.data;
-            }
-            catch (error) {
-                console.log(error);
-                throw new Error(`WoW Community Error :: Error fetching character profile.`);
-            }
+            return yield this._handleApiCall(`${this.gameProfilBaseUrlPath}/character/${realm}/${characterName}`, 'WoW Community Error :: Error fetching character profile.');
         });
     }
     /****************************
@@ -402,7 +396,9 @@ class WowCommunity {
     _handleApiCall(apiUrl, errorMessage) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axios.get(encodeURI(apiUrl));
+                const response = yield this.axios.get(encodeURI(apiUrl), {
+                    params: Object.assign({ namespace: this.namespace }, this.defaultAxiosParams)
+                });
                 return response.data;
             }
             catch (error) {

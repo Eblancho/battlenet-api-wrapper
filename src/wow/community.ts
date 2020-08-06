@@ -6,10 +6,14 @@ class WowCommunity {
     private readonly axios: AxiosInstance;
     private readonly defaultAxiosParams: object;
     private readonly gameBaseUrlPath: string = '/wow';
+    private readonly gameDataBaseUrlPath: string = '/data/wow';
+    private readonly gameProfilBaseUrlPath: string = '/profile/wow';
+    private readonly namespace: string;
 
-    constructor(axiosInstance: AxiosInstance, defaultAxiosParams: object) {
+    constructor(axiosInstance: AxiosInstance, defaultAxiosParams: object, origin: string) {
         this.axios = axiosInstance;
         this.defaultAxiosParams = defaultAxiosParams;
+        this.namespace = `profile-${origin}`;
     }
 
     /****************************
@@ -23,7 +27,7 @@ class WowCommunity {
      */
     async getAchievement(achievementId: number): Promise<object> {
         return await this._handleApiCall(
-            `${this.gameBaseUrlPath}/achievement/${achievementId}`,
+            `${this.gameDataBaseUrlPath}/achievement/${achievementId}`,
             'Error fetching specified achievement.'
         );
     }
@@ -38,7 +42,7 @@ class WowCommunity {
      */
     async getBossMasterList(): Promise<object> {
         return await this._handleApiCall(
-            `${this.gameBaseUrlPath}/boss`,
+            `${this.gameDataBaseUrlPath}/journal-encounter/index`,
             'Error fetching master boss list.'
         );
     }
@@ -51,7 +55,7 @@ class WowCommunity {
      */
     async getBoss(bossId: number): Promise<object> {
         return await this._handleApiCall(
-            `${this.gameBaseUrlPath}/boss/${bossId}`,
+            `${this.gameDataBaseUrlPath}/journal-encounter/${bossId}`,
             'Error fetching specified boss.'
         );
     }
@@ -71,7 +75,7 @@ class WowCommunity {
     async getChallengeModeRealmLeaderboard(realmSlug: string): Promise<object> {
         return await this._handleApiCall(
             `${this.gameBaseUrlPath}/challenge/${realmSlug}`,
-            'Error fetching challenge mode realm leaderboard.'
+            '#TODO CHALLENGE MODE REALM LEADERBOARD NOT SUPPORTED IN THIS VERSION'
         );
     }
 
@@ -83,7 +87,7 @@ class WowCommunity {
     async getChallengeModeRegionLeaderboard(): Promise<object> {
         return await this._handleApiCall(
             `${this.gameBaseUrlPath}/challenge/region`,
-            'Error fetching challenge mode region leaderboard.'
+            'CHALLENGE REGION LEADERBOARD DEPRECATED BY BATTLE.NET'
         );
     }
 
@@ -105,20 +109,10 @@ class WowCommunity {
      * @param fields Specifies the data to retrieve.
      */
     async getCharacterProfile(realm: string, characterName: string, fields: string): Promise<object> {
-        try {
-            const response = await this.axios.get(
-                encodeURI(`${this.gameBaseUrlPath}/character/${realm}/${characterName}`),
-                {
-                  params: {
-                      fields: fields,
-                      ...this.defaultAxiosParams
-                  }
-                });
-            return response.data;
-        } catch (error) {
-            console.log(error);
-            throw new Error(`WoW Community Error :: Error fetching character profile.`);
-        }
+        return await this._handleApiCall(
+            `${this.gameProfilBaseUrlPath}/character/${realm}/${characterName}`,
+            'WoW Community Error :: Error fetching character profile.'
+        );
     }
 
     /****************************
@@ -480,7 +474,12 @@ class WowCommunity {
 
     async _handleApiCall(apiUrl: string, errorMessage: string): Promise<object> {
         try {
-            const response = await this.axios.get(encodeURI(apiUrl));
+            const response = await this.axios.get(encodeURI(apiUrl), {
+                params: {
+                    namespace: this.namespace,
+                    ...this.defaultAxiosParams
+                }
+            });
             return response.data;
         } catch (error) {
             console.log(error);

@@ -96,7 +96,7 @@ class BattleNetWrapper {
         this.HearthstoneGameData = new HearthstoneGameData(this.axios, this.defaultAxiosParams);
         this.Starcraft2Community = new Starcraft2Community(this.axios);
         this.Starcraft2GameData = new Starcraft2GameData(this.axios);
-        this.WowCommunity = new WowCommunity(this.axios, this.defaultAxiosParams);
+        this.WowCommunity = new WowCommunity(this.axios, this.defaultAxiosParams, this.origin);
         this.WowGameData = new WowGameData(this.axios, this.defaultAxiosParams, this.origin);
         this.WowProfileData = new WowProfileData(this.axios, this.defaultAxiosParams, this.origin);
         this.WowClassicGameData = new WowClassicGameData(this.axios, this.defaultAxiosParams, this.origin);
