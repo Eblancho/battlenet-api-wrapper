@@ -1,6 +1,6 @@
 {
-  "name": "battlenet-api-wrapper",
-  "version": "1.0.5",
+  "name": "battlenet-api-wrapper-v2",
+  "version": "2.0.0",
   "description": "A promised-based Node.js wrapper for the Battle.net Community and Data APIs (supports WoW, WoW Classic, SC2, D3, and Hearthstone).",
   "main": "index.js",
   "scripts": {
@@ -14,9 +14,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/QuadDamn/battlenet-api-wrapper.git"
+    "url": "https://github.com/Eblancho/battlenet-api-wrapper.git"
   },
-  "author": "Shane Jeffery",
+  "author": "Enzo BLANCHON",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^13.1.1",
