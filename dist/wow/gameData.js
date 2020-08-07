@@ -521,6 +521,16 @@ class WowGameData {
             return yield this._handleApiCall(`${this.gameBaseUrlPath}/playable-specialization/${playableSpecializationId}`, 'Error fetching specified playable specialization.', this.staticNamespace);
         });
     }
+    /**
+     * Returns media for a playable spec by ID.
+     *
+     * @param playableSpecId The ID of the playable class.
+     */
+    getPlayableSpecializationMedia(playableSpecId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this._handleApiCall(`${this.gameBaseUrlPath}/media/playable-specialization/${playableSpecId}`, 'Error fetching specified playable spec media.', this.staticNamespace);
+        });
+    }
     /****************************
      * Power Type API
      ****************************/

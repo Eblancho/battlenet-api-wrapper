@@ -681,6 +681,19 @@ class WowGameData {
         );
     }
 
+    /**
+     * Returns media for a playable spec by ID.
+     *
+     * @param playableSpecId The ID of the playable class.
+     */
+    async getPlayableSpecializationMedia(playableSpecId: number): Promise<object> {
+        return await this._handleApiCall(
+            `${this.gameBaseUrlPath}/media/playable-specialization/${playableSpecId}`,
+            'Error fetching specified playable spec media.',
+            this.staticNamespace
+        );
+    }
+
     /****************************
      * Power Type API
      ****************************/

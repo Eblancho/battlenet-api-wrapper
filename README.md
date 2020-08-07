@@ -11,6 +11,20 @@ The original code is not fully compatible with the new battle.net API, especiall
 
 A promised-based Node.js wrapper for the Battle.net Community and Data APIs (supports WoW, WoW Classic, SC2, D3, and Hearthstone).
 
+**NEW SINCE FORKED**
+- getPlayableSpecializationMedia
+
+**COMPATIBILITY UPDATED SINCE FORKED**
+- getAchievement
+- getBossMasterList
+- getBoss
+- getCharacterProfile
+
+**DEPRECATED SINCE FORKED**
+- getChallengeModeRealmLeaderboard
+- getChallengeModeRegionLeaderboard
+
+
 ## Installation
 
 `$ npm install --save battlenet-api-wrapper-v2`
