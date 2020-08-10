@@ -378,6 +378,19 @@ class WowGameData {
         );
     }
 
+    /**
+     * Returns a mythic keystone affix by ID.
+     *
+     * @param keystoneAffixId The ID of the Keystone affix.
+     */
+    async getMythicKeystoneAffixMedia(keystoneAffixId: number): Promise<object> {
+        return await this._handleApiCall(
+            `${this.gameBaseUrlPath}/media/keystone-affix/${keystoneAffixId}`,
+            'Error fetching specified mythic keystone affix.',
+            this.staticNamespace
+        );
+    }
+
     /*****************************
      * Mythic Raid Leaderboard API
      ****************************/

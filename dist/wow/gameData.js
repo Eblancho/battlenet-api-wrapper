@@ -292,6 +292,16 @@ class WowGameData {
             return yield this._handleApiCall(`${this.gameBaseUrlPath}/keystone-affix/${keystoneAffixId}`, 'Error fetching specified mythic keystone affix.', this.staticNamespace);
         });
     }
+    /**
+     * Returns a mythic keystone affix by ID.
+     *
+     * @param keystoneAffixId The ID of the Keystone affix.
+     */
+    getMythicKeystoneAffixMedia(keystoneAffixId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this._handleApiCall(`${this.gameBaseUrlPath}/media/keystone-affix/${keystoneAffixId}`, 'Error fetching specified mythic keystone affix.', this.staticNamespace);
+        });
+    }
     /*****************************
      * Mythic Raid Leaderboard API
      ****************************/
