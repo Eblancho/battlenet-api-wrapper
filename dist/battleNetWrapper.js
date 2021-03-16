@@ -99,14 +99,17 @@ class BattleNetWrapper {
     setOAuthToken() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield axios_1.default.get(`https://${this.origin}.battle.net/oauth/token`, {
+                const response = yield axios_1.default.request({
+                    url: `https://${this.origin}.battle.net/oauth/token`,
+                    method: "post",
                     auth: {
                         username: this.clientId,
                         password: this.clientSecret,
                     },
                     params: {
-                        grant_type: 'client_credentials',
-                    },
+                        "grant_type": "client_credentials",
+                        "scope": "public"    
+                    }
                 });
                 this.oauthToken = response.data.access_token;
             }
