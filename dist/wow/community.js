@@ -120,8 +120,8 @@ class WowCommunity {
     getGuildProfile(realm, guildName, fields) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axios.get(encodeURI(`${this.gameBaseUrlPath}/guild/${realm}/${guildName}`), {
-                    params: Object.assign({ fields: fields }, this.defaultAxiosParams)
+                const response = yield this.axios.get(encodeURI(`${this.gameDataBaseUrlPath}/guild/${realm}/${guildName}/roster`), {
+                    params: Object.assign({ namespace: this.namespace }, this.defaultAxiosParams)
                 });
                 return response.data;
             }
