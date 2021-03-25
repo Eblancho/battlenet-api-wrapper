@@ -90,6 +90,18 @@ class WowProfileData {
         });
     }
     /**
+     * Returns a summary of a character's completed raids.
+     *
+     * @param realmSlug The slug of the realm.
+     * @param characterName The lowercase name of the character.
+     *
+     */
+    getCharacterRaid(realmSlug, characterName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this._handleApiCall(`${this.gameBaseUrlPath}/${realmSlug}/${characterName}/encounters/raids`, 'Error fetching character raid.');
+        });
+    }
+    /**
      * If the character is a hunter, returns a summary of the character's hunter pets.
      * Otherwise, returns an HTTP 404 Not Found error.
      *
